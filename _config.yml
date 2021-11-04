@@ -112,7 +112,7 @@ qiniu:
   bucket: lydalll
   secret_file: qiniu.json
   dirPrefix: static
-  urlPrefix: http://r218p93bp.hn-bkt.clouddn.com/static
+  urlPrefix: https://cdn.kyd.leezeeyee.com/static
   up_host: http://upload.qiniu.com
   local_dir: static
   update_exist: true
