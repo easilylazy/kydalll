@@ -14,8 +14,15 @@ jobs:
           echo '::warning:: this is a warning'
           echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
           echo '::warning:: this will NOT be a warning'
-          echo "::`ll`"
+          echo "::`ls`"
           echo '::warning:: this is a warning again'
+            - name: manifest Version
+      - name: qiniu access
+        uses: deef0000dragon1/json-edit-action/@v1
+        env:
+          KEY: access_key
+          VALUE:  ${{ secrets.QINIU_ACCESS_KEY }}
+          FILE: qiniu.json
       # - name: qiniu access
       #   uses: MerthinTechnologies/edit-json-action@v1
       #   with:
