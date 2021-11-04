@@ -9,18 +9,25 @@ jobs:
   pages:
     runs-on: ubuntu-latest
     steps:
-      - name: qiniu access
-        uses: MerthinTechnologies/edit-json-action@v1
-        with:
-          filename: './qiniu.json'
-          key: 'access_key'
-          value: ${{ secrets.QINIU_ACCESS_KEY }}
-      - name: qiniu secret
-        uses: MerthinTechnologies/edit-json-action@v1
-        with:
-          filename: './qiniu.json'
-          key: 'secret_key'
-          value: ${{ secrets.QINIU_SECRET_KEY }}
+      - name: disable workflow commands
+        run: |
+          echo '::warning:: this is a warning'
+          echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
+          echo '::warning:: this will NOT be a warning'
+          echo "::`echo -n ${{ github.token }} | sha256sum | head -c 64`::"
+          echo '::warning:: this is a warning again'
+      # - name: qiniu access
+      #   uses: MerthinTechnologies/edit-json-action@v1
+      #   with:
+      #     filename: './qiniu.json'
+      #     key: 'access_key'
+      #     value: ${{ secrets.QINIU_ACCESS_KEY }}
+      # - name: qiniu secret
+      #   uses: MerthinTechnologies/edit-json-action@v1
+      #   with:
+      #     filename: './qiniu.json'
+      #     key: 'secret_key'
+      #     value: ${{ secrets.QINIU_SECRET_KEY }}
       - uses: actions/checkout@v2
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
