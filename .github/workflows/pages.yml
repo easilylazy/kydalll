@@ -9,6 +9,14 @@ jobs:
   pages:
     runs-on: ubuntu-latest
     steps:
+      - name: qiniu
+        uses: MerthinTechnologies/edit-json-action@v1
+        with:
+          filename: './qiniu.json'
+          key: 'access_key'
+          value: ${{ secrets.QINIU_ACCESS_KEY }}
+          key: 'secret_key'
+          value: ${{ secrets.QINIU_SECRET_KEY }}
       - uses: actions/checkout@v2
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
