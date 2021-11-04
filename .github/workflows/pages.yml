@@ -49,8 +49,22 @@ jobs:
             ${{ runner.OS }}-npm-cache
       - name: Install Dependencies
         run: npm install
+
+
+      - name: Create env file
+        run: |
+          ls
+          cat qiniu.json
+          touch .env
+          echo API_ENDPOINT="https://xxx.execute-api.us-west-2.amazonaws.com" >> .env
+          echo API_KEY=${{ secrets.API_KEY }} >> .env
+          cat .env
       - name: Build
-        run: npm run build
+        run:  |
+          ls
+          cat qiniu.json
+          cat .env
+          npm run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
