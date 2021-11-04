@@ -9,32 +9,6 @@ jobs:
   pages:
     runs-on: ubuntu-latest
     steps:
-      # - name: disable workflow commands
-      #   run: |
-      #     echo '::warning:: this is a warning'
-      #     echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
-      #     echo '::warning:: this will NOT be a warning'
-      #     echo "::`ls`"
-      #     echo '::warning:: this is a warning again'
-      #       - name: manifest Version
-      - name: qiniu access
-        uses: deef0000dragon1/json-edit-action/@v1
-        env:
-          KEY: access_key
-          VALUE:  ${{ secrets.QINIU_ACCESS_KEY }}
-          FILE: qiniu.json
-      # - name: qiniu access
-      #   uses: MerthinTechnologies/edit-json-action@v1
-      #   with:
-      #     filename: './qiniu.json'
-      #     key: 'access_key'
-      #     value: ${{ secrets.QINIU_ACCESS_KEY }}
-      # - name: qiniu secret
-      #   uses: MerthinTechnologies/edit-json-action@v1
-      #   with:
-      #     filename: './qiniu.json'
-      #     key: 'secret_key'
-      #     value: ${{ secrets.QINIU_SECRET_KEY }}
       - uses: actions/checkout@v2
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
@@ -49,21 +23,19 @@ jobs:
             ${{ runner.OS }}-npm-cache
       - name: Install Dependencies
         run: npm install
-
-
-      - name: Create env file
+      - name: Create qiniu file
         run: |
           ls
           cat qiniu.json
-          touch .env
-          echo API_ENDPOINT="https://xxx.execute-api.us-west-2.amazonaws.com" >> .env
-          echo API_KEY=${{ secrets.API_KEY }} >> .env
-          cat .env
+          echo -n {\"access_key\": \" >> qiniu.json
+          echo -n ${{ secrets.QINIU_ACCESS_KEY }} >> qiniu.json
+          echo -n \",\"secret_key\": \" >> qiniu.json
+          echo -n ${{ secrets.QINIU_SECRET_KEY }} >> qiniu.json
+          echo -n \"} >> qiniu.json
+          cat qiniu.json
       - name: Build
         run:  |
-          ls
           cat qiniu.json
-          cat .env
           npm run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
