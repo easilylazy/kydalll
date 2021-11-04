@@ -25,18 +25,13 @@ jobs:
         run: npm install
       - name: Create qiniu file
         run: |
-          ls
-          cat qiniu.json
           echo -n {\"access_key\": \" >> qiniu.json
           echo -n ${{ secrets.QINIU_ACCESS_KEY }} >> qiniu.json
           echo -n \",\"secret_key\": \" >> qiniu.json
           echo -n ${{ secrets.QINIU_SECRET_KEY }} >> qiniu.json
           echo -n \"} >> qiniu.json
-          cat qiniu.json
       - name: Build
-        run:  |
-          cat qiniu.json
-          npm run build
+        run:  npm run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
