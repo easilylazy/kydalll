@@ -14,7 +14,7 @@ jobs:
           echo '::warning:: this is a warning'
           echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
           echo '::warning:: this will NOT be a warning'
-          echo "::`ll"
+          echo "::`ll`"
           echo '::warning:: this is a warning again'
       # - name: qiniu access
       #   uses: MerthinTechnologies/edit-json-action@v1
