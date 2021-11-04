@@ -9,14 +9,14 @@ jobs:
   pages:
     runs-on: ubuntu-latest
     steps:
-      - name: disable workflow commands
-        run: |
-          echo '::warning:: this is a warning'
-          echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
-          echo '::warning:: this will NOT be a warning'
-          echo "::`ls`"
-          echo '::warning:: this is a warning again'
-            - name: manifest Version
+      # - name: disable workflow commands
+      #   run: |
+      #     echo '::warning:: this is a warning'
+      #     echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
+      #     echo '::warning:: this will NOT be a warning'
+      #     echo "::`ls`"
+      #     echo '::warning:: this is a warning again'
+      #       - name: manifest Version
       - name: qiniu access
         uses: deef0000dragon1/json-edit-action/@v1
         env:
